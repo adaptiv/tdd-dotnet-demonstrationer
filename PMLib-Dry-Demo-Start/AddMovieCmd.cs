@@ -2,7 +2,7 @@
 
 namespace PMLibDryDemoStart
 {
-    class AddMovieCmd
+    public class AddMovieCmd
     {
         private static readonly byte[] header = {0xde, 0xad};
         private static readonly byte[] commandChar = {0x02};
