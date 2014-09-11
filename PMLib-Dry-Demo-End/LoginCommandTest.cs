@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using System.IO;
+﻿using System.IO;
+using NUnit.Framework;
 
-namespace PMLibDryDemoStart
+namespace PMLibDryDemoEnd
 {
     [TestFixture]
     class LoginCommandTest

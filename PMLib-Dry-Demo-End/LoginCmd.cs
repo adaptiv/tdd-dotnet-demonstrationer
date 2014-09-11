@@ -1,16 +1,9 @@
 ﻿using System.IO;
 
-namespace PMLibDryDemoStart
+namespace PMLibDryDemoEnd
 {
-    public class LoginCmd
+    public class LoginCmd : Command
     {
-
-        private static readonly byte[] header = {0xde, 0xad};
-        private static readonly byte[] commandChar = {0x01};
-        private static readonly byte[] footer = {0xbe, 0xef};
-        private const int SizeLength = 1;
-        private const int CmdByteLength = 1;
-
         private readonly string _userName;
         private readonly string _password;
 
@@ -20,7 +13,12 @@ namespace PMLibDryDemoStart
             _password = password;
         }
 
-        private int GetSize()
+        protected override byte[] CommandChar
+        {
+            get { return new byte[] {0x01}; }
+        }
+
+        protected override int GetSize()
         {
             return header.Length +
                    SizeLength +
@@ -30,16 +28,10 @@ namespace PMLibDryDemoStart
                    _password.ToBytes().Length + 1;
         }
 
-        public void Write(Stream outputStream)
+        protected override void WriteBody(Stream outputStream)
         {
-            outputStream.Write(header);
-            outputStream.WriteByte((byte) GetSize());
-            outputStream.Write(commandChar);
-            outputStream.Write(_userName.ToBytes());
-            outputStream.WriteByte(0x00);
-            outputStream.Write(_password.ToBytes());
-            outputStream.WriteByte(0x00);
-            outputStream.Write(footer);
+            WriteField(outputStream, _userName);
+            WriteField(outputStream, _password);
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace PMLibDryDemoStart
+namespace PMLibDryDemoEnd
 {
     static class Extensions
     {

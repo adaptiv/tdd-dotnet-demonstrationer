@@ -1,15 +1,9 @@
 ﻿using System.IO;
 
-namespace PMLibDryDemoStart
+namespace PMLibDryDemoEnd
 {
-    class AddMovieCmd
+    public class AddMovieCmd : Command
     {
-        private static readonly byte[] header = {0xde, 0xad};
-        private static readonly byte[] commandChar = {0x02};
-        private static readonly byte[] footer = {0xbe, 0xef};
-        private const int SizeLength = 1;
-        private const int CmdByteLength = 1;
-        
         private readonly string _title;
         private readonly string _director;
         private readonly string _minutes;
@@ -22,8 +16,13 @@ namespace PMLibDryDemoStart
             _minutes = minutes.ToString();
             _rating = rating;
         }
-        
-        private int GetSize()
+
+        protected override byte[] CommandChar
+        {
+            get { return new byte[] {0x02}; }
+        }
+
+        protected override int GetSize()
         {
             return header.Length +
             SizeLength + 
@@ -40,16 +39,17 @@ namespace PMLibDryDemoStart
         {
             outputStream.Write(header);
             outputStream.WriteByte((byte) GetSize());
-            outputStream.Write(commandChar, 0, commandChar.Length);
-            outputStream.Write(_title.ToBytes());
-            outputStream.WriteByte(0x00);
-            outputStream.Write(_director.ToBytes());
-            outputStream.WriteByte(0x00);
-            outputStream.Write(_minutes.ToBytes());
-            outputStream.WriteByte(0x00);
-            outputStream.Write(_rating.ToBytes());
-            outputStream.WriteByte(0x00);
+            outputStream.Write(CommandChar);
+            WriteBody(outputStream);
             outputStream.Write(footer);
+        }
+
+        protected override void WriteBody(Stream outputStream)
+        {
+            WriteField(outputStream, _title);
+            WriteField(outputStream, _director);
+            WriteField(outputStream, _minutes);
+            WriteField(outputStream, _rating);
         }
     }
 }
