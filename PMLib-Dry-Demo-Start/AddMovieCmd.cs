@@ -40,7 +40,7 @@ namespace PMLibDryDemoStart
         {
             outputStream.Write(header);
             outputStream.WriteByte((byte) GetSize());
-            outputStream.Write(commandChar, 0, commandChar.Length);
+            outputStream.Write(commandChar);
             outputStream.Write(_title.ToBytes());
             outputStream.WriteByte(0x00);
             outputStream.Write(_director.ToBytes());
