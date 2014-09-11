@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 
 namespace PMLibDryDemoStart
 {
@@ -27,8 +26,8 @@ namespace PMLibDryDemoStart
                    SizeLength +
                    CmdByteLength +
                    footer.Length +
-                   ToBytes(_userName).Length + 1 +
-                   ToBytes(_password).Length + 1;
+                   _userName.ToBytes().Length + 1 +
+                   _password.ToBytes().Length + 1;
         }
 
         public void Write(Stream outputStream)
@@ -36,16 +35,11 @@ namespace PMLibDryDemoStart
             outputStream.Write(header);
             outputStream.WriteByte((byte) GetSize());
             outputStream.Write(commandChar);
-            outputStream.Write(ToBytes(_userName));
+            outputStream.Write(_userName.ToBytes());
             outputStream.WriteByte(0x00);
-            outputStream.Write(ToBytes(_password));
+            outputStream.Write(_password.ToBytes());
             outputStream.WriteByte(0x00);
             outputStream.Write(footer);
-        }
-
-        private static byte[] ToBytes(string str)
-        {
-            return Encoding.UTF8.GetBytes(str);
         }
     }
 

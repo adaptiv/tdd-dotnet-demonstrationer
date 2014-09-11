@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Text;
 
 namespace PMLibDryDemoStart
 {
@@ -30,10 +29,10 @@ namespace PMLibDryDemoStart
             SizeLength + 
             CmdByteLength +
             footer.Length + 
-            Encoding.UTF8.GetBytes(_title).Length + 1 +
-            Encoding.UTF8.GetBytes(_director).Length + 1 +
-            Encoding.UTF8.GetBytes(_minutes).Length + 1 +
-            Encoding.UTF8.GetBytes(_rating).Length + 1;
+            _title.ToBytes().Length + 1 +
+            _director.ToBytes().Length + 1 +
+            _minutes.ToBytes().Length + 1 +
+            _rating.ToBytes().Length + 1;
         }
 
 
@@ -42,13 +41,13 @@ namespace PMLibDryDemoStart
             outputStream.Write(header);
             outputStream.WriteByte((byte) GetSize());
             outputStream.Write(commandChar, 0, commandChar.Length);
-            outputStream.Write(Encoding.UTF8.GetBytes(_title));
+            outputStream.Write(_title.ToBytes());
             outputStream.WriteByte(0x00);
-            outputStream.Write(Encoding.UTF8.GetBytes(_director));
+            outputStream.Write(_director.ToBytes());
             outputStream.WriteByte(0x00);
-            outputStream.Write(Encoding.UTF8.GetBytes(_minutes));
+            outputStream.Write(_minutes.ToBytes());
             outputStream.WriteByte(0x00);
-            outputStream.Write(Encoding.UTF8.GetBytes(_rating));
+            outputStream.Write(_rating.ToBytes());
             outputStream.WriteByte(0x00);
             outputStream.Write(footer);
         }
