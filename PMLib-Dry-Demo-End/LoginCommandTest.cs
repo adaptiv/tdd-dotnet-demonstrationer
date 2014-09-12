@@ -7,12 +7,12 @@ namespace PMLibDryDemoEnd
     class LoginCommandTest
     {
         
-        private LoginCmd _loginCommand;
+        private LoginCommand _loginCommand;
     
         [SetUp]
         public void SetUp()
         {
-            _loginCommand = new LoginCmd("jholm", "pass");
+            _loginCommand = new LoginCommand("jholm", "pass");
         }
 
         [Test]

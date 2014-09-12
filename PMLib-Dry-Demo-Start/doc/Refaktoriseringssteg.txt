@@ -80,14 +80,14 @@ REFAKTORISERINGEN I DETALJ
 
 5.a  Observation: Båda klasser tar en lista av parametrar, beräknar storlek och skriver ut dem.
    Generalisera fälten till en lista av strängar.
-   LoginCmd, skapa lista av strängar fields.
+   LoginCmd, skapa lista av strängar _fields.
    LoginCmd, konstruktor: Ersätt tilldelning av fält med addering till listan.
-   LoginCmd, GetBodySize: Ersätt med for-loop över fields, addera till resultat i loopen.
-   LoginCmd, WriteBody: Ersätt med for-loop över fields, skriv ut fält i loopen.
-   Ta bort alla instansvariablerna (utom fields).
+   LoginCmd, GetBodySize: Ersätt med for-loop över _fields, addera till resultat i loopen.
+   LoginCmd, WriteBody: Ersätt med for-loop över _fields, skriv ut fält i loopen.
+   Ta bort alla instansvariablerna (utom _fields).
    Kör alla tester.
 
-5.a  Lyft upp fields, GetBodySize och WriteBody till superklassen Command.
+5.a  Lyft upp _fields, GetBodySize och WriteBody till superklassen Command.
    AddMovieCmd: Gör motsvarande ändring i konstruktorn.
    Tag bort fält och metoder som inte behövs.
    Kör alla tester.

@@ -1,42 +1,73 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace PMLibDryDemoEnd
 {
     public abstract class Command
     {
-        protected const int SizeLength = 1;
-        protected const int CmdByteLength = 1;
-        protected static readonly byte[] header = {0xde, 0xad};
-        protected static readonly byte[] footer = {0xbe, 0xef};
+        private const int SizeLength = 1;
+        private const int CmdByteLength = 1;
+        private const int TerminatorCharLength = 1;
+        private static readonly byte[] Header = { 0xde, 0xad };
+        private static readonly byte[] Footer = { 0xbe, 0xef };
+
+        private readonly List<string> _fields;
+
+        protected Command(params string[] fields)
+        {
+            _fields = new List<string>(fields);
+        }
 
         public void Write(Stream outputStream)
         {
-            outputStream.Write(header);
-            outputStream.WriteByte((byte) GetSize());
-            outputStream.Write(CommandChar);
+            WriteHeader(outputStream);
             WriteBody(outputStream);
-            outputStream.Write(footer);
+            WriteFooter(outputStream);
         }
 
-        protected virtual int GetSize()
+        private void WriteHeader(Stream outputStream)
         {
-            return header.Length +
+            outputStream.Write(Header);
+            outputStream.WriteByte((byte) GetSize());
+            outputStream.Write(CommandChar);
+        }
+
+        private int GetSize()
+        {
+            return Header.Length +
                    SizeLength +
                    CmdByteLength +
-                   footer.Length +
+                   Footer.Length +
                    GetBodySize();
         }
 
-        protected abstract int GetBodySize();
+        private int GetBodySize()
+        {
+            return _fields.Sum(field => GetFieldSize(field));
+        }
+
+        private static int GetFieldSize(string field)
+        {
+            return field.ToBytes().Length + TerminatorCharLength;
+        }
 
         protected abstract byte[] CommandChar { get; }
 
-        protected abstract void WriteBody(Stream outputStream);
+        private void WriteBody(Stream outputStream)
+        {
+            _fields.ForEach(field => WriteField(outputStream, field));
+        }
 
-        protected static void WriteField(Stream outputStream, string field)
+        private static void WriteField(Stream outputStream, string field)
         {
             outputStream.Write(field.ToBytes());
             outputStream.WriteByte(0x00);
+        }
+
+        private static void WriteFooter(Stream outputStream)
+        {
+            outputStream.Write(Footer);
         }
     }
 }

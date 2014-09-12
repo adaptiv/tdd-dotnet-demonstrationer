@@ -7,12 +7,12 @@ namespace PMLibDryDemoEnd
     class AddMovieCommandTest
     {
 
-        private AddMovieCmd _addMovieCommand;
+        private AddMovieCommand _addMovieCommand;
 
         [SetUp]
         public void SetUp()
         {
-            _addMovieCommand = new AddMovieCmd("12 Monkeys", "Terry Gilliam", 123, "PG");
+            _addMovieCommand = new AddMovieCommand("12 Monkeys", "Terry Gilliam", 123, "PG");
         }
 
         [Test]
