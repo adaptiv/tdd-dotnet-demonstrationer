@@ -9,18 +9,6 @@ namespace PMLibDryDemoEnd
         protected static readonly byte[] header = {0xde, 0xad};
         protected static readonly byte[] footer = {0xbe, 0xef};
 
-        protected static void WriteField(Stream outputStream, string field)
-        {
-            outputStream.Write(field.ToBytes());
-            outputStream.WriteByte(0x00);
-        }
-
-        protected abstract byte[] CommandChar { get; }
-
-        protected abstract int GetSize();
-
-        protected abstract void WriteBody(Stream outputStream);
-
         public void Write(Stream outputStream)
         {
             outputStream.Write(header);
@@ -28,6 +16,27 @@ namespace PMLibDryDemoEnd
             outputStream.Write(CommandChar);
             WriteBody(outputStream);
             outputStream.Write(footer);
+        }
+
+        protected virtual int GetSize()
+        {
+            return header.Length +
+                   SizeLength +
+                   CmdByteLength +
+                   footer.Length +
+                   GetBodySize();
+        }
+
+        protected abstract int GetBodySize();
+
+        protected abstract byte[] CommandChar { get; }
+
+        protected abstract void WriteBody(Stream outputStream);
+
+        protected static void WriteField(Stream outputStream, string field)
+        {
+            outputStream.Write(field.ToBytes());
+            outputStream.WriteByte(0x00);
         }
     }
 }

@@ -13,19 +13,15 @@ namespace PMLibDryDemoEnd
             _password = password;
         }
 
+        protected override int GetBodySize()
+        {
+            return _userName.ToBytes().Length + 1 +
+                   _password.ToBytes().Length + 1;
+        }
+
         protected override byte[] CommandChar
         {
             get { return new byte[] {0x01}; }
-        }
-
-        protected override int GetSize()
-        {
-            return header.Length +
-                   SizeLength +
-                   CmdByteLength +
-                   footer.Length +
-                   _userName.ToBytes().Length + 1 +
-                   _password.ToBytes().Length + 1;
         }
 
         protected override void WriteBody(Stream outputStream)

@@ -17,31 +17,17 @@ namespace PMLibDryDemoEnd
             _rating = rating;
         }
 
+        protected override int GetBodySize()
+        {
+            return _title.ToBytes().Length + 1 +
+                   _director.ToBytes().Length + 1 +
+                   _minutes.ToBytes().Length + 1 +
+                   _rating.ToBytes().Length + 1;
+        }
+
         protected override byte[] CommandChar
         {
             get { return new byte[] {0x02}; }
-        }
-
-        protected override int GetSize()
-        {
-            return header.Length +
-            SizeLength + 
-            CmdByteLength +
-            footer.Length + 
-            _title.ToBytes().Length + 1 +
-            _director.ToBytes().Length + 1 +
-            _minutes.ToBytes().Length + 1 +
-            _rating.ToBytes().Length + 1;
-        }
-
-
-        public void Write(Stream outputStream)
-        {
-            outputStream.Write(header);
-            outputStream.WriteByte((byte) GetSize());
-            outputStream.Write(CommandChar);
-            WriteBody(outputStream);
-            outputStream.Write(footer);
         }
 
         protected override void WriteBody(Stream outputStream)

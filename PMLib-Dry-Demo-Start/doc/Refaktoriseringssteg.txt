@@ -61,7 +61,7 @@ REFAKTORISERINGEN I DETALJ
    Flytta upp GetSize till Command. Skapa en abstrakt protected GetBodySize.
    Kör alla tester.
 
-3.b Observation: Konstruktorn i AddMovieCmd ligger inte Först.
+3.b Observation: Konstruktorn i AddMovieCmd ligger inte först.
    Ändra (generellt) ordningen på metoderna i logisk ordning.
    Kör alla tester.
 
