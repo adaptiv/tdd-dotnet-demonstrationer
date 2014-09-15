@@ -23,7 +23,7 @@ REFAKTORISERINGEN I DETALJ
 
 1.b  För att kunna använda nya metoden i AddMovieCmd måste vi skapa en gemensam superklass.
    Skapa *Command*, flytta upp WriteField med Extract superclass, gör metoden protected.
-   Låt AddMovieCmd ärva från Command. Ersätt alla utskrifter av fält i AddMovidCmd.
+   Låt AddMovieCmd ärva från Command. Ersätt alla utskrifter av fält i AddMovieCmd.
    Kör alla tester.
 
 ---
@@ -41,9 +41,9 @@ REFAKTORISERINGEN I DETALJ
    Tag bort fältet och lägg i stället in kommandotecknet i den nya property:n (inline).
    Kör alla tester.
 
-2.d  Skapa en abstrakt getter GetCommandChar i superklassen som motsvarar GetCommandChar.
+2.d  Skapa en abstrakt property CommandChar i superklassen som motsvarar CommandChar.
    För att kunna göra detta måste klassen göras abstrakt också.
-   LoginCmd: Gör om GetCommandChar till en instansmetod (ej statisk) och protected.
+   LoginCmd: Gör om CommandChar till en instansproperty (ej statisk) och protected.
    AddMovieCmd: Gör om fältet till en property CommandChar på motsvarande sätt.
    Kör alla tester.
 
@@ -82,8 +82,8 @@ REFAKTORISERINGEN I DETALJ
    Generalisera fälten till en lista av strängar.
    LoginCmd, skapa lista av strängar _fields.
    LoginCmd, konstruktor: Ersätt tilldelning av fält med addering till listan.
-   LoginCmd, GetBodySize: Ersätt med for-loop över _fields, addera till resultat i loopen.
-   LoginCmd, WriteBody: Ersätt med for-loop över _fields, skriv ut fält i loopen.
+   LoginCmd, GetBodySize: Ersätt med foreach-loop över _fields, addera till resultat i loopen.
+   LoginCmd, WriteBody: Ersätt med foreach-loop över _fields, skriv ut fält i loopen.
    Ta bort alla instansvariablerna (utom _fields).
    Kör alla tester.
 
@@ -116,7 +116,7 @@ REFAKTORISERINGEN I DETALJ
  
  6.b  Vad återstår som inte DRY rår på?
    Namngivning: Byt namn på klasserna till LoginCommand och AddMovieCommand.
-   Namngivning: header och footer borde skrivas med versaler.
+   Namngivning: header och footer borde skrivas med PascalCase.
    Composed Method: Skapa metoderna WriteHeader och WriteFooter i Command.
    Kodformatering, t.ex. GetSize.
    Skapa konstanter för konstanta värden, t.ex. TerminatorCharLength
