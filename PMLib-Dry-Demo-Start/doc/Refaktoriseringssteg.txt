@@ -80,15 +80,16 @@ REFAKTORISERINGEN I DETALJ
 
 5.a  Observation: Båda klasser tar en lista av parametrar, beräknar storlek och skriver ut dem.
    Generalisera fälten till en lista av strängar.
-   LoginCmd, skapa lista av strängar _fields.
+   LoginCmd, skapa lista av strängar Fields, gör protected
    LoginCmd, konstruktor: Ersätt tilldelning av fält med addering till listan.
-   LoginCmd, GetBodySize: Ersätt med foreach-loop över _fields, addera till resultat i loopen.
-   LoginCmd, WriteBody: Ersätt med foreach-loop över _fields, skriv ut fält i loopen.
-   Ta bort alla instansvariablerna (utom _fields).
+   LoginCmd, GetBodySize: Ersätt med foreach-loop över Fields, addera till resultat i loopen.
+   Överkurs: Konvertera till LINQ-uttryck med hjälp av extension method Sum()
+   LoginCmd, WriteBody: Ersätt med foreach-loop över Fields, skriv ut fält i loopen.
+   Ta bort alla instansvariablerna (utom Fields).
    Kör alla tester.
 
-5.a  Lyft upp _fields, GetBodySize och WriteBody till superklassen Command.
-   AddMovieCmd: Gör motsvarande ändring i konstruktorn.
+5.a  Lyft upp Fields, GetBodySize och WriteBody till superklassen Command med Pull up member. 
+   AddMovieCmd: Gör motsvarande ändring i konstruktorn och ta bort metoderna GetBodySize och WriteBody
    Tag bort fält och metoder som inte behövs.
    Kör alla tester.
 
