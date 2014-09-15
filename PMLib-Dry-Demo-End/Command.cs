@@ -12,12 +12,7 @@ namespace PMLibDryDemoEnd
         private static readonly byte[] Header = { 0xde, 0xad };
         private static readonly byte[] Footer = { 0xbe, 0xef };
 
-        private readonly List<string> _fields;
-
-        protected Command(params string[] fields)
-        {
-            _fields = new List<string>(fields);
-        }
+        protected readonly List<string> Fields = new List<string>();
 
         public void Write(Stream outputStream)
         {
@@ -44,7 +39,7 @@ namespace PMLibDryDemoEnd
 
         private int GetBodySize()
         {
-            return _fields.Sum(field => GetFieldSize(field));
+            return Fields.Sum(field => GetFieldSize(field));
         }
 
         private static int GetFieldSize(string field)
@@ -56,7 +51,7 @@ namespace PMLibDryDemoEnd
 
         private void WriteBody(Stream outputStream)
         {
-            _fields.ForEach(field => WriteField(outputStream, field));
+            Fields.ForEach(field => WriteField(outputStream, field));
         }
 
         private static void WriteField(Stream outputStream, string field)

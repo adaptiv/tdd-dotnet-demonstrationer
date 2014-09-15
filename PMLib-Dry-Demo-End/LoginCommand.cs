@@ -4,8 +4,9 @@ namespace PMLibDryDemoEnd
     public class LoginCommand : Command
     {
         public LoginCommand(string userName, string password)
-            : base(userName, password)
         {
+            Fields.Add(userName);
+            Fields.Add(password);
         }
 
         protected override byte[] CommandChar
