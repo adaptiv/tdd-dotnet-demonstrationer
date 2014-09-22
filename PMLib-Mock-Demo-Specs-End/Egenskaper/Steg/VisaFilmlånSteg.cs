@@ -27,7 +27,7 @@ namespace PMLibMockDemo.Egenskaper.Steg
         {
             var film = Film.SkapaNyMed(titel: titel);
             string resultat = _filmbibliotek.VisaVemSomLånat(film);
-            ScenarioContext.Current.Set<string>(resultat, "resultat");
+            ScenarioContext.Current.Set(resultat, "resultat");
         }
         
         [Then(@"ska meddelandet ""(.*)"" visas på skärmen")]
