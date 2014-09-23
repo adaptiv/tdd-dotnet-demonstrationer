@@ -17,24 +17,25 @@ namespace PMLibMockDemo.Egenskaper.Steg
         [Given(@"att vännen ""(.*)"" har lånat filmen ""(.*)""")]
         public void GivetAttVannenHarLanatFilmen(string namnPåVän, string filmTitel)
         {
-            var vän = Vän.SkapaNyMed(namn: namnPåVän);
-            var film = Film.SkapaNyMed(titel: filmTitel);
+            Vän vän = Vän.SkapaNyMed(namn: namnPåVän);
+            Film film = Film.SkapaNyMed(titel: filmTitel);
             _filmbibliotek.RegistreraLån(film: film, låntagare: vän);
         }
 
         [When(@"jag frågar vem som lånat filmen ""(.*)""")]
         public void NarJagFragarVemSomLanatFilmen(string titel)
         {
-            var film = Film.SkapaNyMed(titel: titel);
-            string resultat = _filmbibliotek.VisaVemSomLånat(film);
-            ScenarioContext.Current.Set(resultat, "resultat");
+            Film film = Film.SkapaNyMed(titel: titel);
+            Lån lån = _filmbibliotek.HittaLånAv(film: film);
+            IVy vy = VisaLånVy.SkapaNyMed(modell: lån);
+            ScenarioContext.Current.Set(vy);
         }
 
         [Then(@"ska meddelandet ""(.*)"" visas på skärmen")]
         public void SaSkaMeddelandetVisasPaSkarmen(string meddelande)
         {
-            var resultat = ScenarioContext.Current.Get<string>("resultat");
-            Assert.That(resultat, Is.EqualTo(meddelande));
+            IVy vy = ScenarioContext.Current.Get<IVy>();
+            Assert.That(vy.Rendera(), Is.EqualTo(meddelande));
         }
     }
 }

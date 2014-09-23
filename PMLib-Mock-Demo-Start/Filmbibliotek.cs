@@ -12,7 +12,7 @@
             throw new System.NotImplementedException();
         }
 
-        public string VisaVemSomLånat(Film film)
+        public Lån HittaLånAv(Film film)
         {
             throw new System.NotImplementedException();
         }

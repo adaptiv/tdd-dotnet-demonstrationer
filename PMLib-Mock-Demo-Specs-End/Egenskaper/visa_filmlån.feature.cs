@@ -72,11 +72,11 @@ namespace PMLibMockDemo.Egenskaper
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Film som finns i filmbiblioteket utlånad till en vän", ((string[])(null)));
 #line 8
 this.ScenarioSetup(scenarioInfo);
-#line 11
+#line 9
 testRunner.Given("att vännen \"Måns\" har lånat filmen \"Hajen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Givet ");
-#line 12
+#line 10
 testRunner.When("jag frågar vem som lånat filmen \"Hajen\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "När ");
-#line 13
+#line 11
 testRunner.Then("ska meddelandet \"Måns har lånat filmen Hajen\" visas på skärmen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Så ");
 #line hidden
             this.ScenarioCleanup();

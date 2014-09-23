@@ -32,8 +32,8 @@ namespace PMLibMockDemo.Egenskaper
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("sv-SE"), "Visa filmlån", "För att kunna påminna en person som lånat en film att lämna tillbaka den\r\nSom en " +
-                    "filmsamlare\r\nVill jag kunna se vem som lånat en viss film", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("sv-SE"), "Visa filmlån", "För att kunna påminna en vän som lånat en film att lämna tillbaka den\r\nSom en fil" +
+                    "msamlare\r\nVill jag kunna se vilken vän som lånat en viss film", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
