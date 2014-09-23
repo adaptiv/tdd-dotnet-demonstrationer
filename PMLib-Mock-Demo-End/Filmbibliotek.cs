@@ -1,4 +1,3 @@
-using System;
 
 namespace PMLibMockDemo
 {
@@ -14,7 +13,7 @@ namespace PMLibMockDemo
             return new Filmbibliotek(utlåningsregister: utlåningsregister);
         }
 
-        public static Filmbibliotek SkapaNytt(IUtlåningsregister utlåningsregister)
+        internal static Filmbibliotek SkapaNytt(IUtlåningsregister utlåningsregister)
         {
             return new Filmbibliotek(utlåningsregister);
         }
