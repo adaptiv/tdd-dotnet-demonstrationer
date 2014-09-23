@@ -10,7 +10,7 @@ namespace PMLibMockDemo
         private Mock<IUtlåningsregister> _lånRegisterMock;
 
         [SetUp]
-        public void SkapaFilmbibliotek()
+        public void SkaparFilmbibliotek()
         {
             _lånRegisterMock = new Mock<IUtlåningsregister>();
             _filmbibliotek = Filmbibliotek.SkapaNytt(utlåningsregister: _lånRegisterMock.Object);
@@ -20,8 +20,8 @@ namespace PMLibMockDemo
         public void RegistrerarLån()
         {
             // Arrange
-            Film film = Film.SkapaNyMed(titel: "Hajen");
-            Vän vän = Vän.SkapaNyMed(namn: "Måns");
+            var film = Film.SkapaNyMed(titel: "Hajen");
+            var vän = Vän.SkapaNyMed(namn: "Måns");
 
             // Act
             _filmbibliotek.RegistreraLån(film: film, låntagare: vän);
@@ -31,7 +31,7 @@ namespace PMLibMockDemo
         }
 
         [Test]
-        public void VisarVemSomLånatEnFilm()
+        public void HittarLånAvFilm()
         {
             // Arrange
             Vän låntagare = Vän.SkapaNyMed(namn: "Måns");
@@ -40,10 +40,10 @@ namespace PMLibMockDemo
             _lånRegisterMock.Setup(l => l.HittaLånAv(film)).Returns(lån);
 
             // Act
-            string resultat = _filmbibliotek.VisaVemSomLånat(film);
+            var resultat = _filmbibliotek.HittaLånAv(film);
 
             // Assert
-            Assert.That(resultat, Is.EqualTo("Måns har lånat filmen Hajen"));
+            Assert.That(resultat, Is.EqualTo(lån));
         }
     }
 }

@@ -26,15 +26,16 @@ namespace PMLibMockDemo.Egenskaper.Steg
         public void NarJagFragarVemSomLanatFilmen(string titel)
         {
             var film = Film.SkapaNyMed(titel: titel);
-            string resultat = _filmbibliotek.VisaVemSomLånat(film);
-            ScenarioContext.Current.Set(resultat, "resultat");
+            var lån = _filmbibliotek.HittaLånAv(film: film);
+            IVy vy = VisaLånVy.SkapaNyMed(modell: lån);
+            ScenarioContext.Current.Set(vy);
         }
         
         [Then(@"ska meddelandet ""(.*)"" visas på skärmen")]
         public void SaSkaMeddelandetVisasPaSkarmen(string meddelande)
         {
-            var resultat = ScenarioContext.Current.Get<string>("resultat");
-            Assert.That(resultat, Is.EqualTo(meddelande));
+            var vy = ScenarioContext.Current.Get<IVy>();
+            Assert.That(vy.Rendera(), Is.EqualTo(meddelande));
         }
     }
 }
